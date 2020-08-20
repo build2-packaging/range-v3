@@ -15,4 +15,5 @@ for test_cpp : $tests_sources
     ./ : exe{$test_name...} : $test_cpp $rangev3 $test_headers
 }
 
-./ : exe{test.multiple...} : cxx{multiple*} $rangev3
+./ : exe{test.multiple...} : upstream/cxx{multiple*} $rangev3 $test_headers
+

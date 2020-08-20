@@ -1,7 +1,7 @@
 ./ : manifest test/ example/
 
 # Documentation
-./ : doc{README.md} doc/doc{**.md}
+./ : upstream/doc{README.md} upstream/doc/doc{**.md}
 
 intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
