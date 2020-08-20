@@ -3,8 +3,8 @@ import rangev3 = range-v3%lib{range-v3}
 
 
 # TODO: add an option to handle coroutine tests and remove the exception to not build experimental tests
-tests_sources = {cxx}{** -multiple* -experimental/**}
-test_headers = {hxx}{**}
+tests_sources = upstream/{cxx}{** -multiple* -experimental/**}
+test_headers = upstream/{hxx}{**}
 
 for test_cpp : $tests_sources
 {

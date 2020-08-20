@@ -1,10 +1,11 @@
 
 import rangev3 = range-v3%lib{range-v3}
 
-# TODO: add an option to activate the calendar test (requires boost libraries as an optional dependency)
-tests_sources = {cxx}{** -calendar}
 
-for test_cpp : $tests_sources
+# TODO: add an option to activate the calendar test (requires boost libraries as an optional dependency)
+example_sources = upstream/{cxx}{** -calendar}
+
+for test_cpp : $example_sources
 {
     dot_path = $regex.replace($directory($test_cpp), '\\', '.')
     dot_path = $regex.replace($dot_path, '/', '.')

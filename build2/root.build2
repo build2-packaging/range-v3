@@ -19,3 +19,4 @@ if($cxx.class == 'msvc')
     cxx.poptions =+ /permissive-
 }
 
+upstream_dir = $src_root/upstream
