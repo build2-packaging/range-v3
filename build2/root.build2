@@ -1,0 +1,21 @@
+using cxx.guess
+
+cxx.std = ($cxx.id == 'msvc' ? experimental : latest) # Use `experimental` by default on msvc as otherwise the project cannot compile.
+
+using cxx
+
+hxx{*}: extension = hpp
+ixx{*}: extension = ipp
+txx{*}: extension = tpp
+cxx{*}: extension = cpp
+
+# The test target for cross-testing (running tests under Wine, etc).
+#
+test.target = $cxx.target
+
+
+if($cxx.class == 'msvc')
+{
+    cxx.poptions =+ /permissive-
+}
+

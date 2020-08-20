@@ -1,0 +1,24 @@
+# This is the package manifest for build2
+
+: 1
+name: range-v3
+version: 0.11.0-a.0.z
+summary: Range library for C++14/17/20.
+license: Boost Software License
+description-file: README.md
+url: https://github.com/ericniebler/range-v3
+email: eniebler@boost.org
+package-url: https://github.com/Klaim/range-v3
+package-email: mjklaim@gmail.com
+
+depends: * build2 >= 0.13.0
+depends: * bpkg >= 0.13.0
+
+requires: c++14 | c++17 | c++20
+builds: default experimental          ; Only modern compilers are supported.
+build-include: windows**-msvc_16**    ; Only use msvc on Windows.
+build-exclude: windows**              ; Only use msvc on Windows.
+
+
+
+
