@@ -15,17 +15,17 @@ For more info, read [`build2`'s documentation](https://build2.org/doc.xhtml), in
     (Of course you can use another version if it's available, see [`build2`'s documentation for the versions constraints](https://build2.org/bpkg/doc/build2-package-manager-manual.xhtml#package-version-constraint))
 
 2. Then optionally specify how to find the package by adding in `./repositories.manifest` either:
-    - to get it from `https://cppget.org` (assuming a published package exist in the `stable` repo):
+    - to get it from `https://cppget.org` (assuming a published package exist in the `apha` repo - it will be in `stable` once it reaches v1.x):
         ```
         :
         role: prerequisite
-        location: https://pkg.cppget.org/1/stable
+        location: https://pkg.cppget.org/1/alpha
         ```
     - to get it from this git repository (here we'll us the `master` branch as an example):
         ```
         :
         role: prerequisite
-        location: https://github.com/ericniebler/range-v3.git#master
+        location: https://github.com/build2-packaging/range-v3.git#master
         ```
     Specifying the repository in `repositories.manifest` will make all developers who want to work on your project to automatically fetch that package the specified repository without other operations, so it's a good default.
 
@@ -55,7 +55,7 @@ You can now try to build your project (using `b` or  `bdep update`), which will 
 
 1. Clone this repository (at a branch providing `build2` files), for example:
     ```
-    git clone https://github.com/ericniebler/range-v3.git#master range-v3
+    git clone https://github.com/build2-packaging/range-v3.git#master range-v3
     cd range-v3
     ```
 2. Initialize the project in a configuration:
@@ -94,11 +94,11 @@ You can just build, test, install the library without setting up a project using
 1. Then depending on how you prefer to acquire the package, either:
     - Fetch and build range-v3, for example the version currently in branch `master` :
       ```
-      bpkg build https://github.com/ericniebler/range-v3.git#master
+      bpkg build https://github.com/build2-packaging/range-v3.git#master
       ```
-    - Or add `https://cppget.org` repository, fetch and build the package - for example if the package is available in the `stable` repo:
+    - Or add `https://cppget.org` repository, fetch and build the package - for example if the package is available in the `alpha` repo:
       ```
-      bpkg add bpkg add https://pkg.cppget.org/1/stable
+      bpkg add bpkg add https://pkg.cppget.org/1/alpha
       bpkg fetch
       bpkg build range-v3
       ```

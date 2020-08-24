@@ -8,7 +8,7 @@ license: Boost Software License
 description-file: upstream/README.md
 url: https://github.com/ericniebler/range-v3
 email: eniebler@boost.org
-package-url: https://github.com/Klaim/range-v3
+package-url: https://github.com/build2-packaging/range-v3
 package-email: mjklaim@gmail.com
 
 depends: * build2 >= 0.13.0
