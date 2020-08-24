@@ -1,19 +1,23 @@
 
-import rangev3 = range-v3%lib{range-v3}
+# import rangev3 = range-v3%lib{range-v3}
+import rangev3 = lib{range-v3}
 
+exe{*} : test = true
 
 # TODO: add an option to handle coroutine tests and remove the exception to not build experimental tests
-tests_sources = upstream/{cxx}{** -multiple* -experimental/**}
-test_headers = upstream/{hxx}{**}
+test_src_dir = $src_root/upstream/test
+tests_sources = $test_src_dir/{cxx}{** -multiple* -experimental/**}
+test_headers = $test_src_dir/{hxx}{**}
 
 for test_cpp : $tests_sources
 {
-    dot_path = $regex.replace($directory($test_cpp), '\\', '.')
+    dot_path = $regex.replace($directory($test_cpp), '\\', '/')
+    dot_path = $regex.replace($dot_path, '^(.*?)upstream\/test\/', '')
     dot_path = $regex.replace($dot_path, '/', '.')
     test_name = "test.$dot_path$name($test_cpp)"
     # info "-> $test_name"
     ./ : exe{$test_name...} : $test_cpp $rangev3 $test_headers
 }
 
-./ : exe{test.multiple...} : upstream/cxx{multiple*} $rangev3 $test_headers
+./ : exe{test.multiple...} : $test_src_dir/cxx{multiple*} $rangev3 $test_headers
 

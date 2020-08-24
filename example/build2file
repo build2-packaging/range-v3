@@ -1,16 +1,19 @@
 
-import rangev3 = range-v3%lib{range-v3}
+# import rangev3 = range-v3%lib{range-v3}
+import rangev3 = lib{range-v3}
 
+exe{*} : test = true
 
 # TODO: add an option to activate the calendar test (requires boost libraries as an optional dependency)
-example_sources = upstream/{cxx}{** -calendar}
+example_sources = $src_root/upstream/example/{cxx}{** -calendar}
 
-for test_cpp : $example_sources
+for example_cpp : $example_sources
 {
-    dot_path = $regex.replace($directory($test_cpp), '\\', '.')
+    dot_path = $regex.replace($directory($example_cpp), '\\', '/')
+    dot_path = $regex.replace($dot_path, '^(.*?)upstream\/example\/', '')
     dot_path = $regex.replace($dot_path, '/', '.')
-    test_name = "example.$dot_path$name($test_cpp)$exe_ext"
-    # info "-> $test_name"
-    ./ : exe{$test_name...} : $test_cpp $rangev3
+    example_name = "example.$dot_path$name($example_cpp)$exe_ext"
+    # info "-> $example_name"
+    ./ : exe{$example_name...} : $example_cpp $rangev3
 }
 

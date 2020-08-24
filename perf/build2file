@@ -1,12 +1,15 @@
 
-import rangev3 = range-v3%lib{range-v3}
+# import rangev3 = range-v3%lib{range-v3}
+import rangev3 = lib{range-v3}
+
+exe{*} : test = true
 
 perf_dir = $src_root/upstream/perf
 
 for test_cpp : $perf_dir/cxx{*}
 {
     test_name = "$name($test_cpp)"
-    # info "-> $test_name"
+    info "-> $test_name"
     ./ : exe{$test_name} : $test_cpp $rangev3
 }
 
