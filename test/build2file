@@ -6,11 +6,13 @@ exe{*} : test = true
 
 # TODO: add an option to handle coroutine tests and remove the exception to not build experimental tests
 test_src_dir = $src_root/upstream/test
-tests_sources = $test_src_dir/{cxx}{** -multiple* -experimental/**}
+# skip `partition_move` which is not built upstream (see cmake files), but take all the tests otherwise
+tests_sources = $test_src_dir/{cxx}{** -multiple* -experimental/** -algorithm/partition_move}
 test_headers = $test_src_dir/{hxx}{**}
 
 for test_cpp : $tests_sources
 {
+
     dot_path = $regex.replace($directory($test_cpp), '\\', '/')
     dot_path = $regex.replace($dot_path, '^(.*?)upstream\/test\/', '')
     dot_path = $regex.replace($dot_path, '/', '.')
