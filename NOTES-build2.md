@@ -7,7 +7,12 @@ For more info, read [`build2`'s documentation](https://build2.org/doc.xhtml), in
 
 # Add `range-v3` as a dependency to your `build2` project
 
-0. If you don't already have a `build2` project, [use `bdep new` to immediately create a new "hello world" project](https://build2.org/bdep/doc/bdep-new.xhtml).
+0. If you don't already have a `build2` project, [use `bdep new` to immediately create a new "hello world" project](https://build2.org/bdep/doc/bdep-new.xhtml). For example:
+    ```
+    bdep new myproject
+    cd myproject
+    ```
+
 1. Add this line in your project's `./manifest`:
     ```
     depends: range-v3 ~0.11.0
