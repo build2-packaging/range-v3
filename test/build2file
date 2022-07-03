@@ -6,8 +6,20 @@ exe{*} : test = true
 
 # TODO: add an option to handle coroutine tests and remove the exception to not build experimental tests
 test_src_dir = $src_root/upstream/test
+
 # skip files which are not built upstream (see cmake files), but take all the tests otherwise
-tests_sources = $test_src_dir/{cxx}{** -multiple* -experimental/** -algorithm/partition_move -algorithm/copy_n -algorithm/fill_n}
+tests_to_skip = 'algorithm/partition_move' 'algorithm/copy_n' 'algorithm/fill_n'
+
+# FIXME: skipping these tests for now, re-enable once we can handle these
+tests_to_skip += 'multiple*' 'experimental/**'
+
+# FIXME: issue only visible when building with clang + msvc toolchain, once fixed re-enable this test
+if($cxx.id == 'clang' && $cxx.target.class == 'windows')
+{
+    tests_to_skip += 'action\adjacent_remove_if'
+}
+
+tests_sources = $test_src_dir/{cxx}{** -{$tests_to_skip}}
 test_headers = $test_src_dir/{hxx}{**}
 
 for test_cpp : $tests_sources
@@ -23,3 +35,26 @@ for test_cpp : $tests_sources
 
 ./ : exe{test.multiple...} : $test_src_dir/cxx{multiple*} $rangev3 $test_headers
 
+# Compilation Flags (see ../upstream/cmake/ranges_diagnostics.cmake)
+if($cxx.id != 'msvc')
+{
+    # Enable all warnings:
+    cc.coptions += -Weverything -pedantic -pedantic-errors
+    
+    # Selectively disable those warnings that are not worth it:
+    cc.coptions += -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-weak-vtables -Wno-padded -Wno-missing-variable-declarations -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast
+
+    if($cxx.target.class == 'macos')
+    {
+        cc.coptions += -Wno-global-constructors -Wno-exit-time-destructors
+    }
+
+    if($cxx.id == 'clang')
+    {
+        cc.coptions += -Wno-missing-prototypes
+
+        # FIXME: remove this once handled correctly upstream
+        cc.poptions += -DRANGES_HAS_WERROR=0
+        cc.coptions += -Wno-reserved-identifier -Wno-suggest-destructor-override -Wno-suggest-override -Wno-zero-as-null-pointer-constant -Wno-unused-command-line-argument -Wno-uninitialized
+    }
+}
