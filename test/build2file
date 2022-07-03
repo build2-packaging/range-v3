@@ -39,7 +39,11 @@ for test_cpp : $tests_sources
 if($cxx.id != 'msvc')
 {
     # Enable all warnings:
-    cc.coptions += -Weverything -pedantic -pedantic-errors
+    cc.coptions += -pedantic -pedantic-errors
+    if($cxx.id == 'clang')
+    {
+        cc.coptions += -Weverything 
+    }
     
     # Selectively disable those warnings that are not worth it:
     cc.coptions += -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-weak-vtables -Wno-padded -Wno-missing-variable-declarations -Wno-documentation -Wno-documentation-unknown-command -Wno-old-style-cast
@@ -51,7 +55,7 @@ if($cxx.id != 'msvc')
 
     if($cxx.id == 'clang')
     {
-        cc.coptions += -Wno-missing-prototypes
+        cc.coptions += -Wno-missing-prototypes 
 
         # FIXME: remove this once handled correctly upstream
         cc.poptions += -DRANGES_HAS_WERROR=0
