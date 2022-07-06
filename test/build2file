@@ -14,10 +14,10 @@ tests_to_skip = 'algorithm/partition_move' 'algorithm/copy_n' 'algorithm/fill_n'
 tests_to_skip += 'multiple*' 'experimental/**'
 
 # FIXME: issue only visible when building with clang + msvc toolchain, once fixed re-enable this test
-if($cxx.id == 'clang' && $cxx.target.class == 'windows')
-{
-    tests_to_skip += 'action\adjacent_remove_if'
-}
+# if($cxx.id == 'clang' && $cxx.target.class == 'windows')
+# {
+#     tests_to_skip += 'action\adjacent_remove_if'
+# }
 
 tests_sources = $test_src_dir/{cxx}{** -{$tests_to_skip}}
 test_headers = $test_src_dir/{hxx}{**}
