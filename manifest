@@ -16,10 +16,10 @@ depends: * bpkg >= 0.14.0
 
 requires: c++14 | c++17 | c++20
 builds: default experimental          ; Only modern compilers are supported.
-build-include: windows**-msvc_16**    ; Only use msvc on Windows.
-build-exclude: windows**              ; Only use msvc on Windows.
-build-exclude: **clang_13**           ; Works with C++14 to 20 only, not C++23 yet.
-build-exclude: **clang_14**           ; Works with C++14 to 20 only, not C++23 yet.
-build-exclude: **emcc**         ; Works with C++14 to 20 only, not C++23 yet.
+# build-include: windows**-msvc_16**    ; Only use msvc on Windows.
+# build-exclude: windows**              ; Only use msvc on Windows.
+# build-exclude: **clang_13**           ; Works with C++14 to 20 only, not C++23 yet.
+# build-exclude: **clang_14**           ; Works with C++14 to 20 only, not C++23 yet.
+# build-exclude: **emcc**         ; Works with C++14 to 20 only, not C++23 yet.
 
 
