@@ -38,6 +38,7 @@ if($cxx.id != 'msvc')
 {
     # Enable all warnings:
     # cja my clang 15.0 doesn't like -pedantic-errors...
+    # further, getting warning spam from -Wgnu-line-marker, not sure why.
     cc.coptions += -pedantic #-pedantic-errors
     if($cxx.id == 'clang')
     {
