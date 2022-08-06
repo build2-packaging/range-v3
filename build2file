@@ -1,5 +1,5 @@
-./: range-v3/ test/ example/ manifest
-#{*/ -build/ -upstream/} manifest
+# NOTE: enabling perf would require Google Benchmark dependency
+./: {*/ -build2/ -upstream/ -perf/} manifest
 
 # Documentation
 #
@@ -7,5 +7,6 @@
 
 # Don't install tests or examples.
 #
-#test/: install = false
-#example/: install = false
+test/: install = false
+perf/: install = false
+example/: install = false
