@@ -1,4 +1,4 @@
-./: range-v3/ test/ manifest
+./: range-v3/ test/ example/ manifest
 #{*/ -build/ -upstream/} manifest
 
 # Documentation
