@@ -15,7 +15,6 @@ include/range/v3/
    #$src_base/in{version} $src_root/manifest
   {
     dist = true
-    # @cja should this now become _src? don't know what this is about.
     clean = ($src_root != $out_root)
     in.symbol = '@'
     RANGE_V3_MAJOR = $version.major
@@ -26,8 +25,7 @@ include/range/v3/
 
 
 # @cja to verify - why /std? 
-include_dirs_flags = "-I$src_base/include/std" "-I$src_base/include"  "-I$out_base/include"
- #"-I$src_root/upstream/include/std" "-I$src_root/upstream/include"  "-I$out_root/upstream/include"
+include_dirs_flags = "-I$src_base/include" "-I$out_base/include" # "-I$src_base/include/std"
 
 # Build options.
 #
