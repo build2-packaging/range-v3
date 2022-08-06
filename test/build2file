@@ -37,9 +37,10 @@ for test_cpp : $tests_sources
 if($cxx.id != 'msvc')
 {
     # Enable all warnings:
-    # cja my clang 15.0 doesn't like -pedantic-errors...
+    # cja my clang 15.0 pre-release on Windows doesn't like -pedantic-errors...
     # further, getting warning spam from -Wgnu-line-marker, not sure why.
-    cc.coptions += -pedantic #-pedantic-errors
+    # clang windows builds remain off in package manifest
+    cc.coptions += -pedantic -pedantic-errors
     if($cxx.id == 'clang')
     {
         cc.coptions += -Weverything 
