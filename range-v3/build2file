@@ -24,8 +24,8 @@ include/range/v3/
 }
 
 
-# @cja to verify - why /std? 
-include_dirs_flags = "-I$src_base/include" "-I$out_base/include" # "-I$src_base/include/std"
+# @cja note: removed -I for /include/std, not sure what reason was for it's previous inclusion?
+include_dirs_flags = "-I$src_base/include" "-I$out_base/include"
 
 # Build options.
 #
