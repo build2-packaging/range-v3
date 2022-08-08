@@ -18,6 +18,7 @@
 #
 #*.png binary
 
-test/upstream symlink=dir
-perf/upstream symlink=dir
-example/upstream symlink=dir
+range-v3/include symlink=dir
+test/src symlink=dir
+perf/src symlink=dir
+example/src symlink=dir
