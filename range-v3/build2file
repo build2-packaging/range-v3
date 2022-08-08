@@ -3,28 +3,6 @@ impl_libs = # Implementation dependencies.
 
 ./: lib{range-v3}: include/{hxx ixx txx}{**} $impl_libs $intf_libs
 
-# Include the generated version header into the distribution (so that we don't
-# pick up an installed one) and don't remove it when cleaning in src (so that
-# clean results in a state identical to distributed).
-#
-lib{range-v3}: include/range/v3/hxx{version}
-include/range/v3/
-{
-  # @cja struggling to see how to do this in a nice way, but anyway, what is reason for this? seems version.hpp is already set in upstream.
-  hxx{version}: $src_base/../../../in{version} $src_root/manifest
-   #$src_base/in{version} $src_root/manifest
-  {
-    dist = true
-    clean = ($src_root != $out_root)
-    in.symbol = '@'
-    RANGE_V3_MAJOR = $version.major
-    RANGE_V3_MINOR = $version.minor
-    RANGE_V3_PATCHLEVEL = $version.patch
-  }
-}
-
-
-# @cja note: removed -I for /include/std, not sure what reason was for it's previous inclusion?
 include_dirs_flags = "-I$src_base/include" "-I$out_base/include"
 
 # Build options.
@@ -38,7 +16,6 @@ lib{range-v3}:
   cxx.export.poptions = $include_dirs_flags
   cxx.export.libs = $intf_libs
 }
-
 
 include/
 {
