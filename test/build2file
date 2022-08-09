@@ -1,11 +1,10 @@
 
-# import rangev3 = range-v3%lib{range-v3}
 import rangev3 = lib{range-v3}
 
 exe{*} : test = true
 
 # TODO: add an option to handle coroutine tests and remove the exception to not build experimental tests
-test_src_dir = $src_root/upstream/test
+test_src_dir = $src_base/src
 
 # skip files which are not built upstream (see cmake files), but take all the tests otherwise
 tests_to_skip = 'algorithm/partition_move' 'algorithm/copy_n' 'algorithm/fill_n'
@@ -24,12 +23,11 @@ test_headers = $test_src_dir/{hxx}{**}
 
 for test_cpp : $tests_sources
 {
-
     dot_path = $regex.replace($directory($test_cpp), '\\', '/')
-    dot_path = $regex.replace($dot_path, '^(.*?)upstream\/test\/', '')
+    dot_path = $regex.replace($dot_path, '^(.*?)test\/src\/', '')
     dot_path = $regex.replace($dot_path, '/', '.')
     test_name = "test.$dot_path$name($test_cpp)"
-    # info "-> $test_name"
+    #info "-> $test_name"
     ./ : exe{$test_name...} : $test_cpp $rangev3 $test_headers
 }
 
@@ -39,6 +37,9 @@ for test_cpp : $tests_sources
 if($cxx.id != 'msvc')
 {
     # Enable all warnings:
+    # cja my clang 15.0 pre-release on Windows doesn't like -pedantic-errors...
+    # further, getting warning spam from -Wgnu-line-marker, not sure why.
+    # clang windows builds remain off in package manifest
     cc.coptions += -pedantic -pedantic-errors
     if($cxx.id == 'clang')
     {

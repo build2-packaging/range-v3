@@ -1,6 +1,6 @@
 $out_root/
 {
-  include ./
+  include range-v3/
 }
 
-export $out_root/$import.target
+export $out_root/range-v3/$import.target

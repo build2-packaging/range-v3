@@ -1,0 +1,30 @@
+intf_libs = # Interface dependencies.
+impl_libs = # Implementation dependencies.
+
+./: lib{range-v3}: include/{hxx ixx txx}{**} $impl_libs $intf_libs
+
+include_dirs_flags = "-I$src_base/include" "-I$out_base/include"
+
+# Build options.
+#
+cxx.poptions =+ $include_dirs_flags
+
+# Export options.
+#
+lib{range-v3}:
+{
+  cxx.export.poptions = $include_dirs_flags
+  cxx.export.libs = $intf_libs
+}
+
+include/
+{
+  # Install into the range-v3/ subdirectory of, say, /usr/include/
+  # recreating subdirectories.
+  #
+  {hxx ixx txx}{*}:
+  {
+    install         = include/ # Header paths are already containing include/range/...
+    install.subdirs = true
+  }
+}

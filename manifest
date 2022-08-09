@@ -2,7 +2,7 @@
 
 : 1
 name: range-v3
-version: 0.12.0+1
+version: 0.12.0+2
 summary: Range library for C++14/17/20.
 license: Boost Software License
 description-file: upstream/README.md
@@ -11,15 +11,16 @@ email: eniebler@boost.org
 package-url: https://github.com/build2-packaging/range-v3
 package-email: mjklaim@gmail.com
 
-depends: * build2 >= 0.14.0
-depends: * bpkg >= 0.14.0
+depends: * build2 >= 0.15.0
+depends: * bpkg >= 0.15.0
 
 requires: c++14 | c++17 | c++20
 builds: default experimental          ; Only modern compilers are supported.
 build-include: windows**-msvc_16**    ; Only use msvc on Windows.
+build-include: windows**-msvc_17**    ; Only use msvc on Windows.
 build-exclude: windows**              ; Only use msvc on Windows.
 build-exclude: **clang_13**           ; Works with C++14 to 20 only, not C++23 yet.
 build-exclude: **clang_14**           ; Works with C++14 to 20 only, not C++23 yet.
-build-exclude: **emcc**         ; Works with C++14 to 20 only, not C++23 yet.
+build-exclude: **emcc**               ; Works with C++14 to 20 only, not C++23 yet.
 
 
